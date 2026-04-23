@@ -11,7 +11,7 @@ Desarrollar un modelo que:
 Detecte la mayor cantidad posible de fraudes (alto recall)
 Minimice falsos positivos (precision razonable)
 Sea escalable y aplicable en entornos reales.
-La IA permite
+La IA nos permite:
 - aprender patrones complejos automáticamente.
 - manejar grandes volúmenes de datos.
 - Detección de patrones oculto.
