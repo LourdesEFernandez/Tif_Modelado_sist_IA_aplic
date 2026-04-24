@@ -42,6 +42,19 @@ Contiene solo variables de entrada numéricas que son el resultado de una transf
 
 
 ## Ciclo técnico
+---
+## Resumen visual del contenido de este repositorio
+|    Carpeta	    | Contenido clave                       |
+| :---              | :---                                  |
+| **data/**	        | **raw/** : Dataset original.          |
+|                   | **processed/** : Los datos limpios, transformados y listos para entrenar el modelo. |
+| **docs/**         |	Documentación teórica y técnica del proyecto (manual de usuario).  |
+| **models/**       |	El modelo de IA guardado (.pkl). |
+| **notebooks/**    |	Archivos de EDA, visualizaciones y pruebas de diferentes algoritmos de IA (.ipynb). |
+| **src/**          |	Scripts de Python que ejecutan el sistema automáticamente. |
+| **requirements.txt** |	La lista de librerías necesarias y sus versiones. |
+
+
 ## Instrucciones de instalación
 _Pasos a seguir para correr la app localmente_
 
