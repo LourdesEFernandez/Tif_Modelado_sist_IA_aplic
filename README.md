@@ -40,23 +40,34 @@ Contiene solo variables de entrada numéricas que son el resultado de una transf
 | **Class**           | Numérica | 0 = normal ; 1 = fraude                   |
 
 
-
-## Ciclo técnico
----
 ## Resumen visual del contenido de este repositorio
 |    Carpeta	    | Contenido clave                       |
 | :---              | :---                                  |
-| **data/**	        | **raw/** : Dataset original.          |
-|                   | **processed/** : Los datos limpios, transformados y listos para entrenar el modelo. |
 | **docs/**         |	Documentación teórica y técnica del proyecto (manual de usuario).  |
-| **models/**       |	El modelo de IA guardado (.pkl). |
+| **models/**       |	El modelo de IA guardado (.pkl), escalador usado (.pkl) |
 | **notebooks/**    |	Archivos de EDA, visualizaciones y pruebas de diferentes algoritmos de IA (.ipynb). |
-| **src/**          |	Scripts de Python que ejecutan el sistema automáticamente. |
+| **src/**          |	Scripts de Python con la app |
 | **requirements.txt** |	La lista de librerías necesarias y sus versiones. |
 
 
 ## Instrucciones de instalación
-_Pasos a seguir para correr la app localmente_
+- **Paso 1:** Descargar carpeta de archivos.zip desde el boton ``` <> Code ```
+- **Paso 2:** Descomprimir archivo en una ubicación cómoda por ej: 
+    
+    ``` C:/Documentos/carpeta_proyecto ```
+
+- **Paso 3:** Crear entorno virtual en su PC (solo la primera vez)
+    
+    Desde tu terminal ejecuta el siguiente comando:
+    
+  ``` python -m venv src/.venv ```
+
+- **Paso 4:** Instalar librerias usando el archivo de texto requirements.txt
+
+    Comando:    ``` src/.venv\Scripts\pip install -r src/requirements.txt ```
+
+- **Paso 5:** Ahora puedes correr la app desde la carpeta con los archivos clickeando en 
+``` correr_sistema_fraude.bat ```
 
 ## Equipo de trabajo
 * Barboza, María Eugenia
