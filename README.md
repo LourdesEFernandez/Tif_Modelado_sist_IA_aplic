@@ -1,6 +1,3 @@
-_Este archivo está destinado a documentar todo el proceso de desarrollo del TIF. 
-Una vez que se defina el tema y problema a resolver se volcaran a este archivo._
-
 # SISTEMA DE DETECCIÓN DE FRAUDE
 ## Descripción del problema
 Las entidades financieras procesan grandes  volumenes de transacciones electrónicas diariamente. Dentro de este volumen masivo, una pequeña proporción corresponde a operaciones fraudulentas, las cuales generan pérdidas económicas significativas y afectan la confianza de los clientes.
@@ -18,6 +15,37 @@ Desarrollar un sistema basado en Machine Learning supervisado, que aprenda a par
 * Adaptarse a nuevos tipos de fraude.
 * Estimar la probabilidad de fraude, lo que permite: ajustar umbrales
 * Diseñar estrategias de negocio (alerta, bloqueo, revisión).
+
+## ¿Cómo lo hicimos? (Detrás de escena)
+El desarrollo del proyecto se dividió en dos grandes etapas:
+
+- El "Cerebro" (El Modelo de IA):
+
+    Tomamos un conjunto de datos con miles de transacciones históricas (algunas reales y muchas de prueba).
+
+    Analizamos el comportamiento de los datos: montos, horarios y patrones típicos de los estafadores.
+
+    Entrenamos a un algoritmo de Inteligencia Artificial para que "aprendiera" a diferenciar una operación normal de una sospechosa. Nos aseguramos de que el sistema sea muy preciso para no dar falsas alarmas, pero tampoco dejar pasar ningún engaño.
+
+- La "Cara Visible" (La Aplicación Web):
+
+    Como los modelos matemáticos se ejecutan en código y son difíciles de usar para alguien que no programa, construimos una aplicación web interactiva utilizando Streamlit.
+
+    Esta plataforma conecta de forma transparente nuestro "cerebro" de IA con una interfaz visual amigable, con botones, formularios y gráficos interactivos.
+
+## ¿Para quién está destinado?
+Esta aplicación está pensada principalmente para:
+
+- Analistas de Fraude y Equipos de Seguridad: Quienes necesitan una herramienta rápida y visual para auditar transacciones sospechosas sin tener que escribir código.
+
+- Pequeñas y Medianas Empresas (PyMEs) o Fintechs: Negocios que manejan pagos digitales y buscan una solución accesible para proteger sus operaciones y a sus clientes.
+
+- Auditores y Administradores: Usuarios que necesitan subir un listado de movimientos del día y obtener un reporte automático con las alertas de riesgo más altas.
+
+## Flujo de Operación en la Práctica (Workflow del Analista)
+La aplicación está optimizada para integrarse al flujo de trabajo diario de un equipo de mitigación de riesgos:
+
+Auditoría y Scoring Individual: El analista puede ingresar las variables específicas de una transacción bajo sospecha (montos, flags de comportamiento, datos de origen/destino) para obtener un score de riesgo inmediato y el dictamen del modelo (Legítima o Potencial Fraude). Esto facilita la toma de decisiones rápidas ante alertas aisladas.
 
 ## Dataset 
 El conjunto de datos con el que vamos a trabajar se obtuvo de la plataforma de [_kaggle_](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud/data) 
