@@ -50,47 +50,56 @@ with col_izquierda:
 
 
 # 4. LÓGICA DE PROCESAMIENTO (Tras bambalinas)
+
 if boton_auditar:
-    # Inicializamos las 28 variables PCA en 0.0 (punto neutral del PCA)
+    # Inicializamos las 28 variables PCA en 0.0
     componentes_pca = {f"V{i}": 0.0 for i in range(1, 29)}
     
-    # El analista altera los componentes clave (V1, V14, V17 suelen ser los más correlacionados)
+    # Perfil de comercio
     if perfil_comercio == "De Alto Riesgo (Casino/Cripto/Retiros)":
-        componentes_pca["V1"] = -5.4
-        componentes_pca["V3"] = -3.8
-    elif perfil_comercio == "Electrónica Nocturna":
-        componentes_pca["V1"] = -2.1
-        
-    if consistencia_IP == "IP Sospechosa (Cambio drástico de ubicación)":
-        componentes_pca["V2"] = -4.2
-        componentes_pca["V4"] = 2.9
-    elif consistencia_IP == "Uso de VPN/Proxy":
-        componentes_pca["V2"] = -6.1
-        componentes_pca["V11"] = 4.0
-        
-    if alertas_previas > 1:
-        componentes_pca["V14"] = -4.8  # Componente crítico de anomalía
+        componentes_pca["V14"] = -4.8
         componentes_pca["V17"] = -5.1
+        componentes_pca["V12"] = -3.2
+    elif perfil_comercio == "Electrónica Nocturna":
+        componentes_pca["V14"] = -2.5
+        componentes_pca["V17"] = -2.8
 
-    #transformamos la cantidad en pesos a euros de 2013
+    # Geolocalización
+    if consistencia_IP == "IP Sospechosa (Cambio drástico de ubicación)":
+        componentes_pca["V14"] -= 2.0
+        componentes_pca["V10"] = -3.5
+    elif consistencia_IP == "Uso de VPN/Proxy":
+        componentes_pca["V14"] -= 3.5
+        componentes_pca["V17"] -= 2.5
+        componentes_pca["V10"] = -4.0
+
+    # Alertas previas
+    if alertas_previas > 1:
+        componentes_pca["V14"] -= 1.5
+        componentes_pca["V17"] -= 1.5
+    if alertas_previas > 3:
+        componentes_pca["V14"] -= 2.0
+        componentes_pca["V17"] -= 2.0
+
+    # Transformamos el monto
     euros_actuales = cantidad / 1640
-    #ipc euro actual 2,2% - IPC euro 2013 1,1% = 1,1% de aumento
-    factor_deflacion= 1.1/2.2
-    monto_equivalente_sep2013= euros_actuales * factor_deflacion
+    factor_deflacion = 1.1 / 2.2
+    monto_equivalente_sep2013 = euros_actuales * factor_deflacion
 
-    # Escalamos los componentes con el scaler robusto (simulando la transformación que se hizo en el entrenamiento)
+    # Escalamos el monto
     cantidad_escalada = scaler.transform([[monto_equivalente_sep2013]])[0][0]
 
-    # Agregamos Tiempo y Cantidad
+    # Agregamos Time y Amount
     componentes_pca["Amount"] = cantidad_escalada
     componentes_pca["Time"] = time.time() % 86400
-    
-    # Armamos el DataFrame con el orden exacto que espera tu archivo .pkl
-    columnas_ordenadas =["Time"] + [f"V{i}" for i in range(1, 29)] + ["Amount"]
+
+    # Armamos el DataFrame
+    columnas_ordenadas = ["Time"] + [f"V{i}" for i in range(1, 29)] + ["Amount"]
     df_analisis = pd.DataFrame([componentes_pca])[columnas_ordenadas]
-    
-    # Predecimos la probabilidad con el modelo
+
+    # Predecimos
     probabilidad_fraude = modelo.predict_proba(df_analisis)[0, 1]
+
 
     # Mostramos los resultados en la columna de la derecha
     with col_derecha:
